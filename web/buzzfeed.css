@@ -1,0 +1,49 @@
+.blue-div{
+    background-color:#0f65ef;
+    height: 60px;
+    width: 100%;
+}
+
+nav {
+    height: 60px;
+    background-color: white; /* Change background color as desired */
+    display: flex;
+    justify-content: space-between; /* Space items evenly */
+    padding: 0 ;
+    justify-content: center;
+  }
+  
+  ul {
+    list-style: none; /* Remove default bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0;
+    display: flex;
+  }
+  
+  li {
+    display: flex;
+    align-items: center; /* Align text and image vertically */
+    justify-content: space-between;
+    padding-inline: 10px;
+    padding-top: 0;
+    margin: 0;
+  }
+  
+  a {
+    text-decoration: none; /* Remove underline from links */
+    color: #333; /* Change link text color as desired */
+    margin-left: 10px; /* Add space between image and text */
+    flex:1;
+  }
+  
+  h1{
+    font-size:medium;
+    font-family: Arial;
+    font-stretch: narrower;
+  }
+  h2{
+    font-size:small;
+    font-family: Arial;
+  }
+
+  
