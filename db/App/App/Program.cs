@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.VisualBasic;
 
 namespace App
 {
@@ -12,11 +13,11 @@ namespace App
     {
         static void Main(string[] args)
         {
-            string conString = "";
+            string conString = "Data Source=DESKTOP-29QH5RP\\SQLEXPRESS;" + "Initial Catalog=School;Integrated Security=true";
             SqlConnection con = new SqlConnection(conString);
             con.Open();
-            string strStudent = "select * from Students";
-            SqlCommand cmd = new SqlCommand(strStudent, con);
+            string strTeacher = "select * from Teachers";
+            SqlCommand cmd = new SqlCommand(strTeacher, con);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -24,10 +25,11 @@ namespace App
                     Console.WriteLine($"{reader[0]}, {reader[1]}");
                 }
             }
-            SqlDataAdapter daStudents = new SqlDataAdapter(strStudent, con);
+            Console.WriteLine(12);
+            SqlDataAdapter daTeachers = new SqlDataAdapter(strTeacher, con);
             DataSet dset = new DataSet();
-            daStudents.Fill(dset, "Students");
-            foreach (DataRow pRow in dset.Tables["Students"].Rows) {
+            daTeachers.Fill(dset, "Teachers");
+            foreach (DataRow pRow in dset.Tables["Teachers"].Rows) {
                 Console.WriteLine($"{pRow["id"]},{pRow["name"]}");
             }
             con.Close();

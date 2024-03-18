@@ -1,0 +1,7 @@
+C:\Users\norby\Desktop\ubb\db\App\App\bin\Release\App.exe.config
+C:\Users\norby\Desktop\ubb\db\App\App\bin\Release\App.exe
+C:\Users\norby\Desktop\ubb\db\App\App\bin\Release\App.pdb
+C:\Users\norby\Desktop\ubb\db\App\App\obj\Release\App.csproj.AssemblyReference.cache
+C:\Users\norby\Desktop\ubb\db\App\App\obj\Release\App.csproj.CoreCompileInputs.cache
+C:\Users\norby\Desktop\ubb\db\App\App\obj\Release\App.exe
+C:\Users\norby\Desktop\ubb\db\App\App\obj\Release\App.pdb
