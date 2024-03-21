@@ -1,17 +1,77 @@
 import { Button } from "react-bootstrap"
 import { balls as constants} from "./constants"
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
+import Chart from 'chart.js/auto'
+import { Bar } from 'react-chartjs-2';
 
+function split(array, n)
+{
+    const groups = [];
+    for (let i = 0; i < array.length; i += n) {
+        groups.push(array.slice(i, i + n));
+    }
+    return groups;
+}
 const MainPage = () =>
 {
-    const [balls,setBalls] = useState(constants)
+    const [showed, setShowed] = useState(3)
+    const [groups, setGroups] = useState(split(constants, showed))
+    const [page, setPage] = useState(0)
+    const [balls,setBalls] = useState(groups[page])
+    const [sorted, setSorted] = useState(true)
     const [dummyBall, setDummyBall] = useState({ id: "", name: "", brand: "", color: "" })
     const handleDelete = (ball) =>
     {
         const updatedBalls = balls.filter(b => b.id!=ball.id)
         setBalls(updatedBalls)
     }
+    const handleNext = () =>
+    {
+        if (page<groups.length-1)
+        {
+            setPage(prevPage => prevPage+1)
+            setBalls(groups[page+1])
+        }
+        
+    }
+    const handlePrev = () =>
+    {
+        if (page>0)
+        {
+            setPage(prevPage => prevPage-1)
+            setBalls(groups[page-1])
+        }
+
+
+
+    }
+    const SimpleChart = ({ dataValues }) => {
+        const chartData = {
+            labels: dataValues.map(e=>e.name),
+            datasets: [{
+                label: 'Amount',
+                data: dataValues.map(e=>e.amount),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+    
+        const chartOptions = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+    
+        return (
+            <div>
+                <Bar data={chartData} options={chartOptions} />
+            </div>
+        );
+    };
     const handleAdd = (e) =>
     {
         e.preventDefault()
@@ -57,6 +117,19 @@ const MainPage = () =>
     {
         setDummyBall(ball)
     }
+    const handleSort = () =>
+    {
+        let sBalls = []
+        if(sorted)
+        {
+            sBalls = [...balls].sort((a,b) => b.id - a.id)
+        }
+        else{
+            sBalls = [...balls].sort((a,b) => a.id - b.id)
+        }
+        setSorted(!sorted)
+        setBalls(sBalls)
+    }
     return (
         <div class="container">
             <div class="row">
@@ -80,6 +153,14 @@ const MainPage = () =>
                     </tr>))}
                 </tbody>
             </table>
+            <button class="btn btn-warning" onClick={()=>handleSort()}>Sort</button>
+            <button class="button" onClick={()=>handlePrev()}>Prev</button>
+            <button class="button" onClick={()=>handleNext()}>Next</button>
+            <h3>Showing max: {showed}</h3>
+            <h3>Page: {page+1}</h3>
+            <hr></hr>
+            
+            
             </div>
             <div class='col'></div>
             <div class="col">
@@ -141,6 +222,10 @@ const MainPage = () =>
                 <button type="submit" class="btn btn-primary">Edit Product</button>
             </form>
             </div>
+            <div class="row">
+                <SimpleChart dataValues={balls} />
+            </div>
+            
             </div>
             </div>
         </div>
