@@ -1,0 +1,18 @@
+ul{
+    list-style: none;
+}
+.mainmenu{
+    width: 25%;
+}
+
+.submenu {
+    display: none;
+}
+.navtext{
+    background-color: lightcyan;
+    border: 1px solid;
+}
+.submenu > li{
+    background-color: lightcoral;
+    border: 1px solid;
+}
